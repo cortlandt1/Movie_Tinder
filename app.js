@@ -1,7 +1,9 @@
 
 var filmTitleArray = []
 var filmImgArray = []
-var likedFilms = []
+var likedFilmsImg = []
+var likedFilmsTitle = []
+var endOfSwipes = false
 var filmNum = 0
 
 function submitButton() {
@@ -51,13 +53,23 @@ function submitButton() {
     }
 }
 
+// FUNCTIONS TO DIFFERENTIATE ACTIONS FOR LIKED VS DISLIKED FILMS
+
 function likeButton() {
     filmNum++
     $('.title').replaceWith("<p>" + filmTitleArray[filmNum] + "</p>");
     $('.film-container').replaceWith("<img class='film-container' src=" + filmImgArray[filmNum] + "></img>");
-    likedFilms.push(filmImgArray[filmNum])
+    likedFilmsImg.push(filmImgArray[filmNum])
+    likedFilmsTitle.push(filmTitleArray[filmNum])
+    if ( filmNum >= 19 ) {
+        endOfSwipes = true
+        displayLikedFilms()
+        console.log('maximum reached')
+        console.log(endOfSwipes)
+    }
     console.log(filmNum)
-    console.log(likedFilms)
+    console.log(likedFilmsImg)
+    console.log(likedFilmsTitle)
 
 }
 
@@ -65,9 +77,27 @@ function dislikeButton() {
     filmNum++
     $('.title').replaceWith("<p>" + filmTitleArray[filmNum] + "</p>");
     $('.film-container').replaceWith("<img class='film-container' src=" + filmImgArray[filmNum] + "></img>");
+    if ( filmNum >= 19 ) {
+        endOfSwipes = true
+        displayLikedFilms()
+        console.log('maximum reached')
+    }
     console.log(filmNum)
 
 }
+
+//HANDLE DISPLAY OF MUTUALLY LIKED FILMS
+
+function displayLikedFilms () {
+    if (endOfSwipes == true) {
+        for (let i = 0; i < likedFilmsTitle.length; i++) {
+            $('.results').append("<ul><li>" + likedFilmsTitle[i] + "</li></ul>")
+            
+        }
+        $('.film-container').replaceWith("<h1>Here's what you agreed on:</h1>");
+    }
+}
+
 
 
 

@@ -1,6 +1,8 @@
 
 var filmTitleArray = []
 var filmImgArray = []
+var likedFilms = []
+var filmNum = 0
 
 function submitButton() {
     event.preventDefault();
@@ -32,35 +34,40 @@ function submitButton() {
     console.log(filmTitleArray)
     console.log(filmImgArray)
 
-    // setTimeout( initialDisplay, 1000)
-    
+    setTimeout(display, 3000)
+
     function initialDisplay() {
-            $('.title').append("<p>" + filmTitleArray[0] + "</p>");
-            $('.film-container').append("<img class='film-container' src=" + filmImgArray[0] + "></img>");
-         
+        $('.title').append("<p>" + filmTitleArray[0] + "</p>");
+        $('.film-container').append("<img class='film-container' src=" + filmImgArray[0] + "></img>");
+
     }
-    
-    if (filmImgArray.length  == 0) {
-        console.log('Array is empty')
-    } else {
-        initialDisplay()
+
+    function display() {
+        if (filmImgArray.length == 0) {
+            console.log('Array is empty')
+        } else {
+            initialDisplay()
+        }
     }
 }
-    
 
+function likeButton() {
+    filmNum++
+    $('.title').replaceWith("<p>" + filmTitleArray[filmNum] + "</p>");
+    $('.film-container').replaceWith("<img class='film-container' src=" + filmImgArray[filmNum] + "></img>");
+    likedFilms.push(filmImgArray[filmNum])
+    console.log(filmNum)
+    console.log(likedFilms)
 
+}
 
-
-
-
-var filmNum = 0
-function testButton() {
+function dislikeButton() {
     filmNum++
     $('.title').replaceWith("<p>" + filmTitleArray[filmNum] + "</p>");
     $('.film-container').replaceWith("<img class='film-container' src=" + filmImgArray[filmNum] + "></img>");
     console.log(filmNum)
-}
 
+}
 
 
 

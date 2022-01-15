@@ -36,7 +36,7 @@ function submitButton() {
     console.log(filmTitleArray)
     console.log(filmImgArray)
 
-    setTimeout(display, 3000)
+    setTimeout(display, 4000)
 
     function initialDisplay() {
         $('.title').append("<p>" + filmTitleArray[0] + "</p>");
@@ -56,11 +56,11 @@ function submitButton() {
 // FUNCTIONS TO DIFFERENTIATE ACTIONS FOR LIKED VS DISLIKED FILMS
 
 function likeButton() {
+    likedFilmsImg.push(filmImgArray[filmNum])
+    likedFilmsTitle.push(filmTitleArray[filmNum])
     filmNum++
     $('.title').replaceWith("<p>" + filmTitleArray[filmNum] + "</p>");
     $('.film-container').replaceWith("<img class='film-container' src=" + filmImgArray[filmNum] + "></img>");
-    likedFilmsImg.push(filmImgArray[filmNum])
-    likedFilmsTitle.push(filmTitleArray[filmNum])
     if ( filmNum >= 19 ) {
         endOfSwipes = true
         displayLikedFilms()
